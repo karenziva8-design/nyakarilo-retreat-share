@@ -1,0 +1,12 @@
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Python bytecode from the asset/URL tools
+__pycache__/
+*.pyc
