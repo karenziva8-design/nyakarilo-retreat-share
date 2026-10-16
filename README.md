@@ -16,6 +16,7 @@ X or email.
 | `assets/Nyakarilo-Investor-Pitch-Deck.pdf` | The original PDF, offered as a download. |
 | `tools/build_assets.py` | Re-renders the slide images and the preview card from the PDF. |
 | `tools/set_canonical.py` | Points the preview tags at the live address after publishing. |
+| `tools/update_contact.py` | Rewrites the investor name and e-mail on the deck's last slide, then re-render the images. |
 
 ## Editing the words
 
@@ -29,6 +30,22 @@ uv run --with pymupdf --with pillow python tools/build_assets.py
 ```
 
 That rewrites `pages/*.png` and `assets/preview.jpg` from the new PDF.
+
+## Changing the investor contact
+
+The last slide of the deck and the footer of the page both name the person investors
+should contact. The footer is plain text in `index.html`. The slide is inside the PDF,
+so change both with:
+
+```
+uv run --with pymupdf python tools/update_contact.py
+uv run --with pymupdf --with pillow python tools/build_assets.py
+```
+
+The first command edits the name and e-mail on the final slide in place, keeping the
+typeface, size and colour; it does nothing if they are already up to date. `tools/fonts/Lato-Bold.ttf`
+is the copy of the deck's typeface used for the new text — the font inside the PDF is
+subsetted and cannot draw characters the slides did not already use.
 
 ## After publishing
 
